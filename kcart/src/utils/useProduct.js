@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
-import { FETCH_URL, productList } from "../constants";
-import { useParams } from "react-router-dom";
+import { productList } from "../constants";
 
-const useProduct = () => {
+
+const useProduct = (proId) => {
 
   const [product, setProduct] = useState(null);
-const { proId } = useParams();
+
 
   useEffect(() => {
     getproductInfo();

@@ -25,13 +25,13 @@ const ProductCard = ({
   return (
     <div className="flex flex-wrap w-56 p-2 m-2 shadow-lg bg-green-50 gap-4 rounded-lg md:transform-none duration-700 hover:scale-110">
      <div className="overflow-hidden">
-    <img src={image} alt={title} className="object-cover w-full h-full" />
+    <img src={image} alt={title} className="object-cover w-full h-48" />
   </div>
       <h2 className="font-bold text-xl">{title}</h2>
-      <h3>$ {price} </h3>
+      <h3 className="text-lg text-green-500 font-semibold mt-2">$ {price} </h3>
       <br />
-      <h4 className="font-bold">{category}</h4>
-      <h5 className="font-bold">
+      <h4 className="font-bold text-sm text-gray-600 mt-2">{category}</h4>
+      <h5 className="font-bold text-sm text-gray-600 mt-2">
         <button
           onClick={handleDelete}
           className="text-red-500 hover:text-red-600 border-solid "
