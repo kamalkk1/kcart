@@ -11,7 +11,7 @@ const productSlice = createSlice({
       state.items.push(action.payload);
     },
   
-    deleteItem: (state) => {
+    deleteItem: (state, action) => {
       // Remove the product with the matching id
       state.items = state.items.filter(product => product.id !== action.payload);
     },

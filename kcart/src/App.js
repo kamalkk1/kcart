@@ -1,22 +1,68 @@
-// App.js
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import HomePage from './components/HomePage';
-import InfoPage from './components/InfoPage';
-// import Navbar from './components/Navbar';
+import React, { useState } from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import Body from "./components/Body";
 
-function App() {
+import Error from "./components/Error";
+import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom"
+
+import ProductInfo from "./components/ProductInfo";
+
+import UserContext from "./utils/UserContext";
+import { Provider } from "react-redux";
+import store from "./utils/store"
+
+
+
+// Chunking
+// Code Splitting
+// Dynamic Bundling
+// Lazy Loading
+// On Demand Loading
+// Dynamic Import
+
+const AppLayout = () => {
+  const [user, setUser] = useState({
+    name: "Kamal Kishore ",
+    email: "kamalk2620@gmail.com",
+  });
+
+
   return (
-    <Router>
-      <div className="App">
-    
-        <Routes>
-          <Route exact path="/" component={HomePage} />
-          <Route path="/info/:productId" component={InfoPage} />
-        </Routes>
-      </div>
-    </Router>
+    <Provider store={store}>
+      <UserContext.Provider
+        value={{
+          user: user,
+          setUser: setUser,
+        }}
+      >
+     
+        <Outlet />
+      
+      </UserContext.Provider>
+    </Provider>
   );
-}
+};
+const appRouter = createBrowserRouter([
+  {
+    path: "/",
+    element: <AppLayout />,
+    errorElement: <Error />,
+    children: [
+      {
+        path: "/",
+        element: <Body />,
+      },
+   
+      {
+        path: "/product/:proId",
+        element: <ProductInfo />,
+      },
 
-export default App;
+    ],
+  },
+]);
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+root.render(<RouterProvider router={appRouter} />);

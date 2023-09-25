@@ -18,7 +18,7 @@ const ProductInfo = () => {
       <div>
         <h1>Product info: {proId}</h1>
        
-        <img src={product?.image} />
+        <img src={product?.image} alt="ProductName"/>
         <h3>{product?.title}</h3>
         <h3>{product?.description}</h3>
         <h3>{product?.price} stars</h3>
