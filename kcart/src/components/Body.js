@@ -14,6 +14,7 @@ const Body = () => {
   const [sortedProducts, setSortedProducts] = useState([]);
 
   const sortBy = useSelector((state) => state.product.sortByPrice);
+  const addNew = useSelector((state) => state.product.addProduct);
   const dispatch = useDispatch();
 
   const [isFormVisible, setIsFormVisible] = useState(false);
@@ -112,7 +113,7 @@ const handleAddProduct = (formData) => {
         )}
       </div>
       {isFormVisible && (
-        <ProductForm onSubmit={handleAddProduct} onCancel={() => setIsFormVisible(false)} />
+        <ProductForm onSubmit={handleAddProduct} onCancel={() => setIsFormVisible(false)} value={addNew}/>
       )}
     </>
   );

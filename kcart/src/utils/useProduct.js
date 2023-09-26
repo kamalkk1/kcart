@@ -1,21 +1,29 @@
-import { useState, useEffect } from "react";
-import { productList } from "../constants";
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { FETCH_URL , productList} from '../constants';
 
-
-const useProduct = (proId) => {
-
+const useProduct = () => {
+  const { proId } = useParams();
   const [product, setProduct] = useState(null);
 
-
   useEffect(() => {
-    getproductInfo();
-  }, []);
+    async function getproductInfo() {
+      try {
+        const response = await fetch(`${FETCH_URL}/${proId}`);
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        setProduct(data);
+      } catch (error) {
+        console.error('Error fetching product info:', error);
+      }
+    }
 
-  async function getproductInfo() {
-    const data = await fetch(productList + proId);
-    const json = await data.json();
-    setProduct(json.data);
-  }
+    if (proId) {
+      getproductInfo();
+    }
+  }, [proId]);
 
   return product;
 };
